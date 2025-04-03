@@ -1,0 +1,46 @@
+# Ignore Python cache files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore environment variables
+.env
+*.env
+
+# Ignore virtual environment
+venv/
+ENV/
+*.venv/
+
+# Ignore Django and database-related files
+db.sqlite3
+*.sqlite3
+
+# Ignore logs
+logs/
+*.log
+
+# Ignore compiled Python files
+*.pyc
+*.pyo
+*.pyd
+*.pydist
+*.egg-info/
+dist/
+build/
+
+# Ignore static & media files (if managed dynamically)
+staticfiles/
+media/
+
+# Ignore IDE and editor-specific files
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Ignore migrations cache (optional)
+**/migrations/*.pyc
+**/migrations/*.py
+!**/migrations/__init__.py
