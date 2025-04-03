@@ -1,0 +1,54 @@
+{% extends 'journal/base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Publications</h2>
+
+    <!-- Search Form -->
+    <form method="GET" action="{% url 'publications' %}" class="mb-4">
+        <div class="input-group">
+            <input type="text" name="search" class="form-control" placeholder="Search by Author Name" value="{{ query }}">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
+
+    <!-- Display Research Papers -->
+    <!-- <div class="row">
+    
+        {% for paper in papers %}
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <img src="{{ paper.thumbnail.url }}" class="card-img-top" alt="Paper Thumbnail">
+                <div class="card-body">
+                    <h5 class="card-title">{{ paper.title }}</h5>
+                    <p class="card-text"><strong>Author:</strong> {{ paper.author }}</p>
+                    <p class="card-text">{{ paper.description|truncatewords:20 }}</p>
+                    <a href="{{ paper.file.url }}" class="btn btn-info" target="_blank">Read Paper</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-center">No research papers found.</p>
+        {% endfor %}
+    </div> -->
+
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for paper in papers %}
+        <div class="col">
+            <div class="card h-100 shadow">
+                {% if paper.thumbnail %}
+                <img src="{{ paper.thumbnail.url }}" class="card-img-top fixed-img" alt="Thumbnail">
+                {% endif %}
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">{{ paper.title }}</h5>
+                    <h6 class="card-subtitle text-muted">{{ paper.author }}</h6>
+                    <p class="card-text flex-grow-1">{{ paper.abstract|truncatewords:20 }}</p>
+                    <a href="{{ paper.pdf.url }}" class="btn btn-primary mt-auto" target="_blank">Read Paper</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p class="text-center">No research papers found.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

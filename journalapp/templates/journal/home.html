@@ -1,0 +1,72 @@
+{% extends 'journal/base.html' %}
+
+{% block title %}Home - Journal Site{% endblock %}
+
+{% block content %}
+<!-- About Us Section -->
+<section class="about-us py-5 bg-light">
+    <div class="container">
+        <div class="row align-items-center">
+            <!-- Left Side: About Us -->
+            <div class="col-md-6 custom-border-end">
+                <h3 class="mb-4">About Us</h3>
+                <p class="lead">
+                    Welcome to BAMIS Journal Site, a platform dedicated to publishing high-quality research papers across various domains.
+                </p>
+                <p>
+                    We believe in knowledge-sharing and innovation, providing an open-access platform for researchers.
+                </p>
+            </div>
+
+ <!-- Right Side: List of Authors -->
+<div class="col-md-6 ps-md-4">
+    <h3 class="mb-4 text-md-end text-center">Contributing Authors</h3>
+    
+    <ul class="list-group text-md-end text-center">
+        {% for paper in papers %}
+        <li class="list-group-item border-0">{{ paper.author }}</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Show 'See All Authors' button only if there are more than 6 authors -->
+    {% if total_authors > 6 %}
+    <div class="text-center mt-3">
+        <a href="{% url 'all_authors' %}" class="btn btn-secondary">See All Authors</a>
+    </div>
+    {% endif %}
+</div>
+
+
+        </div>
+    </div>
+</section>
+
+
+<div class="container">
+    <h2 class="mb-4 text-center">Latest Research Papers</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for paper in papers %}
+        <div class="col">
+            <div class="card h-100 shadow">
+                {% if paper.thumbnail %}
+                <img src="{{ paper.thumbnail.url }}" class="card-img-top fixed-img" alt="Thumbnail">
+                {% endif %}
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title">{{ paper.title }}</h5>
+                    <h6 class="card-subtitle text-muted">{{ paper.author }}</h6>
+                    <p class="card-text flex-grow-1">{{ paper.abstract|truncatewords:20 }}</p>
+                    <a href="{{ paper.pdf.url }}" class="btn btn-primary mt-auto" target="_blank">Read Paper</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    
+    {% if total_papers > 6 %}
+    <div class="text-center mt-4">
+        <a href="{% url 'publications' %}" class="btn btn-secondary">View All</a>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
